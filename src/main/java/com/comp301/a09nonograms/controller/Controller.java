@@ -1,6 +1,7 @@
 package com.comp301.a09nonograms.controller;
 
 import com.comp301.a09nonograms.model.Clues;
+import com.comp301.a09nonograms.model.Model;
 
 public interface Controller {
   /** Gets the clues for the active puzzle board */
@@ -38,4 +39,6 @@ public interface Controller {
 
   /** Getter method for the total number of puzzles in the puzzle library */
   int getPuzzleCount();
+
+  Model getModel();
 }
