@@ -5,6 +5,9 @@ public class CluesImpl implements Clues{
     private int[][] _colClues;
 
     public CluesImpl(int[][] rowClues, int[][] colClues){
+        if (rowClues == null || colClues == null){
+            throw new IllegalArgumentException();
+        }
         _rowClues = rowClues;
         _colClues = colClues;
     }
@@ -33,23 +36,12 @@ public class CluesImpl implements Clues{
 
     @Override
     public int getRowCluesLength() {
-        int sum =0;
-        for (int i=0; i<_rowClues.length;i++){
-            for (int j=0; j<_rowClues[0].length;j++){
-                sum += _rowClues[i][j];
-            }
-        }
-        return sum;
+
+        return _rowClues[0].length;
     }
 
     @Override
     public int getColCluesLength() {
-        int sum =0;
-        for (int i=0; i<_colClues.length;i++){
-            for (int j=0; j<_colClues[0].length;j++){
-                sum += _rowClues[i][j];
-            }
-        }
-        return sum;
+        return _colClues[0].length;
     }
 }

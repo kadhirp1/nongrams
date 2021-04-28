@@ -19,7 +19,7 @@ public class AppLauncher extends Application {
   @Override
   public void start(Stage stage) {
     // TODO: Launch your GUI here
-    Group group = new Group();
+
 
     PuzzleLibrary lib = new PuzzleLibrary();
     Model _model = new ModelImpl(lib.create());
@@ -27,19 +27,27 @@ public class AppLauncher extends Application {
     _model.setPuzzleIndex(3);
     Controller control = new ControllerImpl(_model);
     FXComponent comp = new GridComponent(control);
+    FXComponent comp1 = new GridComponent(control);
+    //VBox mainThing = new VBox();
+    //mainThing.setAlignment(Pos.CENTER);
+    //mainThing.getChildren().add(comp.render());
+    Scene scene = new Scene(comp.render(), 700, 700);
+    Scene scene1 = new Scene(comp1.render(),700,700);
+
 
     ModelObserver toggleObserver = (Model model) ->{
       //First line is to represent changes to individual cells
-      comp.render();
+      //Scene newScene = new Scene(mainThing,700,700);
+
+      stage.setScene(scene);
+
       //Potentially render solved component
     };
+    control.getModel().addObserver(toggleObserver);
 
-     control.getModel().addObserver(toggleObserver);
-    VBox mainThing = new VBox();
-    mainThing.setAlignment(Pos.CENTER);
-    mainThing.getChildren().add(comp.render());
-    Scene scene = new Scene(mainThing,700,700);
-    stage.setScene(scene);
+
+
+    stage.setScene(scene1);
     stage.show();
   }
 }
