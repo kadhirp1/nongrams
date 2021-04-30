@@ -61,7 +61,6 @@ public class ModelImpl implements Model{
         int[] rowSums = new int[currClues.getHeight()];
         int[] colSums = new int[currClues.getWidth()];
 
-
         for (int i=0; i<currClues.getHeight(); i++){
             for (int j=0; j<currClues.getRowCluesLength(); j++){
                 rowSums[i] += currClues.getRowClues(i)[j];
