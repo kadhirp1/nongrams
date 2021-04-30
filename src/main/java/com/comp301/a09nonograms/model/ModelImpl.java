@@ -55,21 +55,24 @@ public class ModelImpl implements Model{
         Boolean bool = true;
         Clues currClues = _clues.get(this.getPuzzleIndex());
         Board currBoard = _puzzleMap.getBoard(_clues.get(this.getPuzzleIndex()));
+
         int[] rowSums = new int[currClues.getWidth()];
         int[] colSums = new int[currClues.getHeight()];
-        for (int i=0; i<currClues.getWidth(); i++){
+
+
+        for (int i=0; i<currClues.getHeight(); i++){
             for (int j=0; j<currClues.getRowCluesLength(); j++){
                 rowSums[i] += currClues.getRowClues(i)[j];
             }
         }
-        for (int i=0; i<currClues.getHeight(); i++){
+        for (int i=0; i<currClues.getWidth(); i++){
             for (int j=0; j<currClues.getColCluesLength(); j++){
                 colSums[i] += currClues.getColClues(i)[j];
             }
         }
-        for (int i=0; i<currClues.getWidth(); i++){
+        for (int i=0; i<currClues.getHeight(); i++){
             int sum = 0;
-            for (int j=0; j< currClues.getHeight(); j++){
+            for (int j=0; j< currClues.getWidth(); j++){
                 if (currBoard.isShaded(i,j)){
                     sum += 1;
                 }
@@ -78,9 +81,9 @@ public class ModelImpl implements Model{
                 bool = false;
             }
         }
-        for (int i=0; i<currClues.getHeight(); i++){
+        for (int i=0; i<currClues.getWidth(); i++){
             int sum = 0;
-            for (int j=0; j< currClues.getWidth(); j++){
+            for (int j=0; j< currClues.getHeight(); j++){
                 if (currBoard.isShaded(j,i)){
                     sum += 1;
                 }
@@ -92,24 +95,20 @@ public class ModelImpl implements Model{
         for (ModelObserver o: _activeObservers){
             o.update(this);
         }
+
+
         return bool;
     }
 
     @Override
     public boolean isShaded(int row, int col) {
         Clues clue = _clues.get(this.getPuzzleIndex());
-        if (row > clue.getWidth() || col > clue.getHeight()){
-            throw new RuntimeException();
-        }
         return _puzzleMap.getBoard(clue).isShaded(row,col);
     }
 
     @Override
     public boolean isEliminated(int row, int col) {
         Clues clue = _clues.get(this.getPuzzleIndex());
-        if (row > clue.getWidth() || col > clue.getHeight()){
-            throw new RuntimeException();
-        }
         return _puzzleMap.getBoard(clue).isEliminated(row,col);
     }
 
