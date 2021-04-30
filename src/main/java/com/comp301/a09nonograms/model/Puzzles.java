@@ -10,7 +10,7 @@ public class Puzzles {
     public Puzzles(List<Clues> clues){
         _map = new HashMap<>();
         for (int i=0; i<clues.size();i++){
-            Board tempBoard = new BoardImpl(clues.get(i).getWidth(),clues.get(i).getHeight());
+            Board tempBoard = new BoardImpl(clues.get(i).getHeight(),clues.get(i).getWidth());
             _map.put(clues.get(i),tempBoard);
         }
     }
