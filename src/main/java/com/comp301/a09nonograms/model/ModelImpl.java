@@ -89,6 +89,9 @@ public class ModelImpl implements Model{
                 bool = false;
             }
         }
+        for (ModelObserver o: _activeObservers){
+            o.update(this);
+        }
         return bool;
     }
 

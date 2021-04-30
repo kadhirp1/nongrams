@@ -32,6 +32,9 @@ public class BoardImpl implements Board{
 
     @Override
     public void toggleCellShaded(int row, int col) {
+        if (row > _rowLength || col > _colLength){
+            throw new RuntimeException();
+        }
         if (_board[row][col] == State.SPACE){
             _board[row][col] = State.SHADED;
         }
@@ -42,6 +45,9 @@ public class BoardImpl implements Board{
 
     @Override
     public void toggleCellEliminated(int row, int col) {
+        if (row > _rowLength || col > _colLength){
+            throw new RuntimeException();
+        }
         if (_board[row][col] == State.ELIMINATED){
             _board[row][col] = State.SPACE;
         }
