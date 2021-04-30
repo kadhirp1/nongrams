@@ -49,6 +49,8 @@ public class ModelImpl implements Model{
         _activeObservers.remove(observer);
     }
 
+
+
     @Override
     public boolean isSolved() {
         //Loop through every row
@@ -56,8 +58,8 @@ public class ModelImpl implements Model{
         Clues currClues = _clues.get(this.getPuzzleIndex());
         Board currBoard = _puzzleMap.getBoard(_clues.get(this.getPuzzleIndex()));
 
-        int[] rowSums = new int[currClues.getWidth()];
-        int[] colSums = new int[currClues.getHeight()];
+        int[] rowSums = new int[currClues.getHeight()];
+        int[] colSums = new int[currClues.getWidth()];
 
 
         for (int i=0; i<currClues.getHeight(); i++){
