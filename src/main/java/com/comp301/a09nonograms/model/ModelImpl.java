@@ -117,18 +117,12 @@ public class ModelImpl implements Model{
     public boolean isSpace(int row, int col) {
 
         Clues clue = _clues.get(this.getPuzzleIndex());
-        if (row > clue.getWidth() || col > clue.getHeight()){
-            throw new RuntimeException();
-        }
         return _puzzleMap.getBoard(clue).isSpace(row,col);
     }
 
     @Override
     public void toggleCellShaded(int row, int col) {
         Clues clue = _clues.get(this.getPuzzleIndex());
-        if (row > clue.getWidth() || col > clue.getHeight()){
-            throw new RuntimeException();
-        }
         _puzzleMap.getBoard(clue).toggleCellShaded(row,col);
         for (ModelObserver o: _activeObservers){
             o.update(this);
@@ -138,9 +132,6 @@ public class ModelImpl implements Model{
     @Override
     public void toggleCellEliminated(int row, int col) {
         Clues clue = _clues.get(this.getPuzzleIndex());
-        if (row > clue.getWidth() || col > clue.getHeight()){
-            throw new RuntimeException();
-        }
         _puzzleMap.getBoard(clue).toggleCellEliminated(row,col);
         for (ModelObserver o: _activeObservers){
             o.update(this);

@@ -17,16 +17,25 @@ public class BoardImpl implements Board{
     }
     @Override
     public boolean isShaded(int row, int col) {
+        if (row > _rowLength || col > _colLength){
+            throw new RuntimeException();
+        }
         return _board[row][col] ==  State.SHADED;
     }
 
     @Override
     public boolean isEliminated(int row, int col) {
+        if (row > _rowLength || col > _colLength){
+            throw new RuntimeException();
+        }
         return _board[row][col] ==  State.ELIMINATED;
     }
 
     @Override
     public boolean isSpace(int row, int col) {
+        if (row > _rowLength || col > _colLength){
+            throw new RuntimeException();
+        }
         return _board[row][col] ==  State.SPACE;
     }
 
