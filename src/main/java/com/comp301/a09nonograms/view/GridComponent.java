@@ -1,24 +1,24 @@
 package com.comp301.a09nonograms.view;
 
 import com.comp301.a09nonograms.controller.Controller;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseButton;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class GridComponent implements FXComponent{
     private Controller _controller;
     GridPane gridpane;
     BorderPane borderPane;
+    Rectangle rectangle;
+    int finalI;
+    int finalJ;
+    int num;
 
     public GridComponent(Controller controller){
         _controller = controller;
@@ -34,7 +34,83 @@ public class GridComponent implements FXComponent{
         gridpane.setHgap(20);
         gridpane.setVgap(20);
         gridpane.setPrefSize(25,25);
+        int rowBorder = _controller.getModel().getRowCluesLength();
+        int colBorder = _controller.getModel().getColCluesLength();
 
+        for (int i=0; i<_controller.getModel().getHeight() + rowBorder; i++){
+            for (int j=0; j<_controller.getModel().getWidth() + colBorder; j++){
+                Button button = new Button();
+                if (i < rowBorder && j < colBorder){
+                    //Button button = new Button();
+                    gridpane.add(button,j,i);
+                }
+                else if (i < rowBorder && j >= colBorder){
+                    //Set Col clues here
+                    //Button button = new Button();
+                    button.setText(String.valueOf(_controller.getModel().getColClues(j-colBorder)[i]));
+                    gridpane.add(button,j,i);
+                }
+                else if (i >= rowBorder && j < colBorder){
+                    //set Row clues here
+                   //Button button = new Button();
+                    button.setText(String.valueOf(_controller.getModel().getRowClues(i-rowBorder)[j]));
+                    gridpane.add(button,j,i);
+                }
+                else{
+                    //Set all buttons here
+                    //Button button = new Button();
+                    button.setStyle(black);
+                    rectangle = new Rectangle(20,20);
+                    finalJ = j;
+                    finalI = i;
+
+                    /*
+                    rectangle.setOnMouseClicked((event -> {
+                        if (rectangle.getFill().equals(Color.BLACK)){
+                            if (event.getButton()==MouseButton.PRIMARY){
+                                rectangle.setFill(Color.RED);
+                            }
+                        }
+                    }));
+
+                     */
+
+
+
+                    button.setOnMouseClicked((event)->{
+                        if (event.getButton() == MouseButton.PRIMARY){
+                            //button.setStyle("-fx-background-color: #00FF00; ");
+                            if(_controller.isShaded(finalI -rowBorder, finalJ -colBorder)){
+                                button.setStyle(black);
+                                System.out.println("Turn green to black");
+                            }
+                            else{
+                                button.setStyle(green);
+                                System.out.println("Turn green");
+                            }
+
+                            _controller.toggleShaded(finalI-rowBorder,finalJ-colBorder);
+                        }
+                        if (event.getButton() == MouseButton.SECONDARY){
+
+                            if(_controller.isEliminated(finalI-rowBorder,finalJ-colBorder)){
+                                button.setStyle(black);
+                                System.out.println("Turn red to black");
+                            }
+                            else{
+                                button.setStyle(red);
+                                System.out.println("Turn red");
+                            }
+                            _controller.toggleEliminated(finalI-rowBorder,finalJ-colBorder);
+                        }
+                    });
+
+                    gridpane.add(button,j,i);
+                }
+            }
+        }
+        return gridpane;
+/*
         int i1 =0;
         for (int i=0; i<_controller.getModel().getWidth();i++){
             int j1 =0;
@@ -122,6 +198,8 @@ public class GridComponent implements FXComponent{
 
 
 
-        return borderPane;
+ */
+
+
     }
 }
