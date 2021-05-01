@@ -127,12 +127,18 @@ public class ModelImpl implements Model{
     public void toggleCellShaded(int row, int col) {
         Clues clue = _clues.get(this.getPuzzleIndex());
         _puzzleMap.getBoard(clue).toggleCellShaded(row,col);
+        for (ModelObserver o: _activeObservers){
+            o.update(this);
+        }
     }
 
     @Override
     public void toggleCellEliminated(int row, int col) {
         Clues clue = _clues.get(this.getPuzzleIndex());
         _puzzleMap.getBoard(clue).toggleCellEliminated(row,col);
+        for (ModelObserver o: _activeObservers){
+            o.update(this);
+        }
 
     }
 
