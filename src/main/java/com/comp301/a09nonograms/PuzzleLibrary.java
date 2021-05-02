@@ -21,26 +21,24 @@ public class PuzzleLibrary {
 
   private static void createPuzzleLibrary() {
     clues = new ArrayList<>();
-    int[][] rClues = new int[][] {
-              new int[] {0, 2},
-              new int[] {1, 2},
-              new int[] {0, 3},
-              new int[] {0, 3},
-              new int[] {1, 1},
-      };
-      int[][] colClues =
-              new int[][] {
-                      new int[] {1, 1},
-                      new int[] {0, 1},
-                      new int[] {0, 3},
-                      new int[] {0, 3},
-                      new int[] {3, 1},
-              };
+    int[][] rClues =
+        new int[][] {
+          new int[] {0, 2},
+          new int[] {1, 2},
+          new int[] {0, 3},
+          new int[] {0, 3},
+          new int[] {1, 1},
+        };
+    int[][] colClues =
+        new int[][] {
+          new int[] {1, 1},
+          new int[] {0, 1},
+          new int[] {0, 3},
+          new int[] {0, 3},
+          new int[] {3, 1},
+        };
 
-
-
-
-    clues.add(new CluesImpl(rClues,colClues));
+    clues.add(new CluesImpl(rClues, colClues));
     clues.add(
         new CluesImpl(
             new int[][] {

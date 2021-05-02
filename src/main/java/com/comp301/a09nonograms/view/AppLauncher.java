@@ -10,6 +10,10 @@ import javafx.scene.Group;
 import javafx.scene.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.LinearGradient;
+import javafx.scene.paint.Stop;
 import javafx.stage.Stage;
 
 import java.util.List;
@@ -21,13 +25,27 @@ public class AppLauncher extends Application {
     List<Clues> list = new PuzzleLibrary().create();
     Model model = new ModelImpl(list);
     Controller controller = new ControllerImpl(model);
+
     View view = new View(controller);
     Scene scene = new Scene(view.render());
+    scene.getStylesheets().add("main.css");
     stage.setScene(scene);
+    /*
     model.addObserver((Model m)->{
       scene.setRoot(view.render());
       stage.sizeToScene();
     });
+
+     */
+    // stage.sizeToScene();
+
+    ModelObserver toggle =
+        (Model _model) -> {
+          scene.setRoot(view.render());
+          stage.sizeToScene();
+        };
+    model.addObserver(toggle);
+    stage.setTitle("Nonograms");
     stage.show();
   }
 }
