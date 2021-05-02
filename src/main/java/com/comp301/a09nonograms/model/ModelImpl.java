@@ -93,12 +93,15 @@ public class ModelImpl implements Model{
                 bool = false;
             }
         }
-        //if (bool){
+        /*
+        if (bool){
             for (ModelObserver o: _activeObservers){
                 o.update(this);
             }
-        //}
+        }
 
+         */
+        //System.out.println(bool);
 
 
         return bool;
