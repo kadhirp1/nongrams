@@ -44,11 +44,11 @@ public class BoardImpl implements Board{
         if (row > _rowLength || col > _colLength){
             throw new RuntimeException();
         }
-        if (_board[row][col] == State.SPACE){
-            _board[row][col] = State.SHADED;
+        if (_board[row][col] == State.SHADED){
+            _board[row][col] = State.SPACE;
         }
         else{
-            _board[row][col] = State.SPACE;
+            _board[row][col] = State.SHADED;
         }
     }
 
